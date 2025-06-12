@@ -1,15 +1,70 @@
+/**
+ * @file Matrix.h
+ * @brief Declaración de la clase Matrix para representar y manipular matrices dinámicas.
+ * 
+ * Proporciona una estructura de datos para matrices con gestión automática de memoria
+ * mediante punteros inteligentes y métodos para acceso seguro, llenado e impresión.
+ *
+ * @author [Sergio Felipe Gonzalez Cruz]
+ * @date [11 de junio del 2025]
+ */
+
 #ifndef MATRIX_H
 #define MATRIX_H
 
 #include <memory>
 
+/**
+ * @struct Matrix
+ * @brief Estructura que representa una matriz dinámica de tamaño variable.
+ *
+ * Utiliza punteros inteligentes (`std::unique_ptr`) para gestionar la memoria de forma segura.
+ */
+
 struct Matrix {
     int rows, cols;
-    std::unique_ptr<std::unique_ptr<double[]>[]> matriz;
+    std::unique_ptr<std::unique_ptr<double[]>[]> matriz; // Almacén de datos en una matriz de punteros inteligentes. //
+
+    /**
+     * @brief Constructor de la matriz.
+     *
+     * Asigna dinamicamente la memoria para una matriz de tamaño `rows` x `cols`.
+     *
+     * @param r Número de filas.
+     * @param c Número de columnas.
+     */
 
     Matrix(int r, int c);
-    double& at(int fila, int col);
+
+    /**
+     * @brief Acceso seguro a un elemento de la matriz con verificación de límites.
+     *
+     * Devuelve una referencia al elemento en la posición indicada.
+     * Lanza `std::out_of_range` si los índices exceden los límites.
+     *
+     * @param row Índice de fila (0 <= row < rows).
+     * @param col Índice de columna (0 <= col < cols).
+     * @return double& Referencia al elemento solicitado.
+     *
+     * @throws std::out_of_range Si los índices están fuera de rango.
+     */
+
+    double& at(int row, int col);
+
+    /**
+     * @brief Llena la matriz con valores ingresados por el usuario desde la consola.
+     *
+     * Solicita al usuario cada elemento de la matriz, indicando su posición.
+     */
+
     void fillMatrix();
+    
+    /**
+     * @brief Imprime la matriz en la consola con un formato tabulado.
+     *
+     * Utiliza `std::setw` para alinear columnas y mostrar la matriz de manera legible.
+     */
+
     void print();
 };
 
