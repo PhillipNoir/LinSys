@@ -30,5 +30,7 @@
 
 std::vector<double> gaussElimination(Matrix& A, Matrix& b);
 
+std::vector<double> gaussJordanElimination(Matrix& A, Matrix&b);
+
 
 #endif

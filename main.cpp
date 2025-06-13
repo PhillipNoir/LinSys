@@ -55,6 +55,11 @@ int main() {
 
     std::vector<double> solution = gaussElimination(A, b);
 
+    //Resolver usando Gauss-Jordan
+
+    std::vector<double> solution = gaussJordanElimination(A, b);
+
+
     // Imprimir el vector solución
 
     std::cout << "Solución:\n";
