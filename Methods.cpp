@@ -12,12 +12,39 @@
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [11 de junio de 2025]
  */
-
 #include "Methods.h"
 #include "Matrix.h"
 #include <vector>
 #include <stdexcept>
 #include <cmath>
+#include <iostream>
+#include <iomanip>
+
+/**
+ * @brief Imprime el sistema de ecuaciones lineales en forma matricial.
+ *
+ * Esta función muestra en consola la matriz de coeficientes `A` y el vector de constantes `b` 
+ * en forma de sistema ampliado (matriz aumentada), alineando los valores para mayor legibilidad.
+ * 
+ * Por ejemplo, imprime una salida como esta:
+ * @code
+ *        2         -1         3 |         9
+ *        1          0        -2 |         3
+ * @endcode
+ *
+ * @param A Matriz de coeficientes del sistema de ecuaciones (tipo Matrix).
+ * @param b Vector columna con los términos independientes (tipo Matrix).
+ */
+void imprimirSistema(Matrix& A, Matrix& b) {
+    for (int i = 0; i < A.rows; ++i) {
+        for (int j = 0; j < A.cols; ++j) {
+            std::cout << std::setw(10) << A.at(i, j) << " ";
+        }
+        std::cout << "| " << std::setw(10) << b.at(i, 0) << std::endl;
+    }
+    std::cout << std::endl;
+}
+
 
 /**
  * @brief Resuelve un sistema de ecuaciones lineales mediante el método de eliminación de Gauss con pivoteo parcial.
@@ -31,9 +58,9 @@
  * 
  * @throw std::runtime_error Si el sistema no tiene solución única (pivote cero en la diagonal).
  */
-
-std::vector<double> gaussElimination(Matrix& A, Matrix& b) {
+std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
     int numEcuations = A.rows;
+    bool mostrar = mostrarPasos && numEcuations <= 10;
 
     // Eliminación hacia adelante
     for (int column = 0; column < numEcuations; column++) {
@@ -60,6 +87,11 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b) {
             }
             //Al ser una matriz de una dimensión solo es necesario intecambiar un valor
             std::swap(b.at(column, 0), b.at(maxRow, 0));
+            if (mostrar)
+            {
+                std::cout<<"\nIntercambio de fila "<<column<<" con fila "<< maxRow << ":\n";
+                imprimirSistema(A, b);
+            }
         }
 
         // 3. Eliminar hacia abajo
@@ -72,6 +104,11 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b) {
             }
             //Al ser una matriz de una dimensión solo es necesario modificar un valor
             b.at(row, 0) -= factor * b.at(column, 0);
+            if (mostrar)
+            {
+                std::cout<<"\nEliminando fila " << row << " usando fila "<< column << "(factor = " << factor <<"):\n";
+                imprimirSistema(A, b);
+            }
         }
     }
 
@@ -105,8 +142,7 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b) {
  * 
  * @throw std::runtime_error Si el sistema no tiene solución única (pivote cero en la diagonal).
  */
-
-std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b){
+std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPasos){
     int numEcuations = A.rows;
 
     // Eliminación hacia adelante
@@ -133,7 +169,11 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b){
                 std::swap(A.at(column, col), A.at(maxRow, col));
             }
             //Al ser una matriz de una dimensión solo es necesario intecambiar un valor
-            std::swap(b.at(column, 0), b.at(maxRow, 0));
+            std::swap(b.at(column, 0), b.at(maxRow, 0));   
+            if (mostrarPasos) {
+                std::cout << "Intercambio fila " << column << " con fila " << maxRow << ":\n";
+                imprimirSistema(A, b);
+            } 
         }
 
         // 3. Eliminar hacia abajo
@@ -146,6 +186,10 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b){
             }
             //Al ser una matriz de una dimensión solo es necesario modificar un valor
             b.at(row, 0) -= factor * b.at(column, 0);
+        }
+        if (mostrarPasos) {
+            std::cout << "Después de eliminar hacia abajo en columna " << column << ":\n";
+            imprimirSistema(A, b);
         }
         
     }
@@ -160,6 +204,9 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b){
             }
             b.at(row, 0) -= factor * b.at(column, 0); //Se usa el valor correspondiente de b
         }
+        if (mostrarPasos) {
+            std::cout << "Después de eliminar hacia arriba en columna " << column << ":\n";
+            imprimirSistema(A, b);
     }
 
     // Normalización de pivotes (hacerlos 1)
@@ -172,6 +219,11 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b){
             A.at(rows, col) /= pivot;
         }
         b.at(rows, 0) /= pivot;
+        if (mostrarPasos) {
+            std::cout << "Normalizando fila " << rows << ":\n";
+            imprimirSistema(A, b);
+        }
+        }
     }
 
     //Guardado del vector solución

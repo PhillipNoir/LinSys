@@ -8,7 +8,6 @@
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [11 de junio de 2025]
  */
-
 #ifndef METHODS_H
 #define METHODS_H
 
@@ -27,10 +26,9 @@
  * 
  * @throw std::runtime_error Si el sistema no tiene solución única.
  */
+std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos);
 
-std::vector<double> gaussElimination(Matrix& A, Matrix& b);
-
-std::vector<double> gaussJordanElimination(Matrix& A, Matrix&b);
+std::vector<double> gaussJordanElimination(Matrix& A, Matrix&b, bool mostrarPasos);
 
 
 #endif

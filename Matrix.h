@@ -8,7 +8,6 @@
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [11 de junio del 2025]
  */
-
 #ifndef MATRIX_H
 #define MATRIX_H
 
@@ -20,7 +19,6 @@
  *
  * Utiliza punteros inteligentes (`std::unique_ptr`) para gestionar la memoria de forma segura.
  */
-
 struct Matrix {
     int rows, cols;
     std::unique_ptr<std::unique_ptr<double[]>[]> matriz; // Almacén de datos en una matriz de punteros inteligentes. //
@@ -33,7 +31,6 @@ struct Matrix {
      * @param r Número de filas.
      * @param c Número de columnas.
      */
-
     Matrix(int r, int c);
 
     /**
@@ -48,7 +45,6 @@ struct Matrix {
      *
      * @throws std::out_of_range Si los índices están fuera de rango.
      */
-
     double& at(int row, int col);
 
     /**
@@ -56,7 +52,6 @@ struct Matrix {
      *
      * Solicita al usuario cada elemento de la matriz, indicando su posición.
      */
-
     void fillMatrix();
     
     /**
@@ -64,7 +59,6 @@ struct Matrix {
      *
      * Utiliza `std::setw` para alinear columnas y mostrar la matriz de manera legible.
      */
-
     void print();
 };
 

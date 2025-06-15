@@ -16,9 +16,8 @@
  * 
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [5 de junio de 2025]
- * @version [0.0.2]
+ * @version [0.0.3]
  */
-
 #include "Matrix.h"
 #include "Methods.h"
 #include <iostream>
@@ -28,11 +27,10 @@
  * @brief Función principal del programa.
  * 
  * Solicita al usuario el tamaño del sistema, la matriz de coeficientes A y el vector de constantes b.
- * Luego aplica el método de eliminación gaussiana para resolver el sistema e imprime el vector solución.
+ * Luego aplica el método de eliminación gaussiana o Gauss-Jordan para resolver el sistema e imprime el vector solución.
  * 
  * @return int Código de salida del programa (0 si finaliza correctamente).
  */
-
 int main() {
     int size;
     std::cout << "Bienvenido, ingrese el tamaño del sistema: ";
@@ -51,13 +49,16 @@ int main() {
     std::cout << "Ingrese el vector b:\n";
     b.fillMatrix();
 
+    bool mostrarPasos{true};
+    
+
     // Resolver el sistema usando eliminación gaussiana
 
-    std::vector<double> solution = gaussElimination(A, b);
+    std::vector<double> solution = gaussElimination(A, b, mostrarPasos);
 
     //Resolver usando Gauss-Jordan
 
-    std::vector<double> solution = gaussJordanElimination(A, b);
+    std::vector<double> solution = gaussJordanElimination(A, b, mostrarPasos);
 
 
     // Imprimir el vector solución

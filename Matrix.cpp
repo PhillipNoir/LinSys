@@ -9,7 +9,6 @@
  * @date [11 de junio de 2025]
  * 
  */
-
 #include "Matrix.h"
 #include <iostream>
 #include <iomanip>
@@ -23,7 +22,6 @@
  * @param r Número de filas.
  * @param c Número de columnas.
  */
-
 Matrix::Matrix(int r, int c) : rows(r), cols(c) {
     matriz = std::make_unique<std::unique_ptr<double[]>[]>(rows);
     for (int i = 0; i < rows; i++) {
@@ -42,7 +40,6 @@ Matrix::Matrix(int r, int c) : rows(r), cols(c) {
  * 
  * @throw std::out_of_range Si los índices están fuera de los límites de la matriz.
  */
-
 double& Matrix::at(int row, int col) {
     if (row < 0 || row >= rows || col < 0 || col >= cols) {
         throw std::out_of_range("Índices fuera de rango");
@@ -55,7 +52,6 @@ double& Matrix::at(int row, int col) {
  * 
  * Solicita cada elemento individualmente e imprime su posición para facilitar el ingreso.
  */
-
 void Matrix::fillMatrix() {
     std::cout << "Ingrese los " << rows * cols << " elementos de la matriz:\n";
     for (int i = 0; i < rows; i++) {
@@ -71,7 +67,6 @@ void Matrix::fillMatrix() {
  * 
  * Utiliza `std::setw` para alinear columnas y mostrar la matriz de forma legible.
  */
-
 void Matrix::print() {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
