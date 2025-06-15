@@ -18,6 +18,7 @@
 #include "Methods.h"
 #include <iostream>
 #include <iomanip>
+#include "menu.h"
 
 void menuPrincipal(){
     int opcion {0};
@@ -30,7 +31,7 @@ void menuPrincipal(){
 
     while (continuar)
     {
-        std::cout<<"Por favor, elija el método por el cual deseas resolver tu sistema de ecuaciones lineales o selecciona la opción 'Salir' para terminar el programa: \n";
+        std::cout<<"\nPor favor, elija el método por el cual deseas resolver tu sistema de ecuaciones lineales o selecciona la opción 'Salir' para terminar el programa: \n";
         std::cout << "1. Método de Gauss\n";
         std::cout << "2. Método de Gauss-Jordan\n";
         std::cout << "3. Salir\n";
