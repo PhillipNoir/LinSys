@@ -16,58 +16,24 @@
  * 
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [5 de junio de 2025]
- * @version [0.0.3]
+ * @version [0.4.0]
  */
 #include "Matrix.h"
 #include "Methods.h"
 #include <iostream>
 #include <iomanip>
+#include <menu.h>
 
 /**
  * @brief Función principal del programa.
  * 
- * Solicita al usuario el tamaño del sistema, la matriz de coeficientes A y el vector de constantes b.
- * Luego aplica el método de eliminación gaussiana o Gauss-Jordan para resolver el sistema e imprime el vector solución.
+ *  Llama a la función `menuPrincipal()` que gestiona la interacción
+ *  con el usuario para resolver sistemas de ecuaciones lineales mediante
+ *  los métodos de Gauss y Gauss-Jordan.
  * 
  * @return int Código de salida del programa (0 si finaliza correctamente).
  */
 int main() {
-    int size;
-    std::cout << "Bienvenido, ingrese el tamaño del sistema: ";
-    std::cin >> size;
-
-    // Crear matriz de coeficientes A y vector b
-
-    Matrix A(size, size);
-    Matrix b(size, 1);
-
-    // Llenar A y b con datos ingresados por el usuario
-
-    std::cout << "Ingrese la matriz A:\n";
-    A.fillMatrix();
-
-    std::cout << "Ingrese el vector b:\n";
-    b.fillMatrix();
-
-    bool mostrarPasos{true};
-    
-
-    // Resolver el sistema usando eliminación gaussiana
-
-    std::vector<double> solution = gaussElimination(A, b, mostrarPasos);
-
-    //Resolver usando Gauss-Jordan
-
-    std::vector<double> solution = gaussJordanElimination(A, b, mostrarPasos);
-
-
-    // Imprimir el vector solución
-
-    std::cout << "Solución:\n";
-    
-    for (double val : solution) {
-        std::cout << std::setw(10) << val << " ";
-    }
-
+    menuPrincipal();
     return 0;
 }
