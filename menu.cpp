@@ -1,4 +1,5 @@
 /**
+ * @file menu.cpp
  * @brief Muestra el menú principal del programa y gestiona la interacción con el usuario.
  * 
  * Permite al usuario resolver sistemas de ecuaciones lineales utilizando los métodos de:
@@ -13,6 +14,8 @@
  * - Salir del programa
  * 
  * La función se ejecuta en un bucle hasta que el usuario selecciona la opción de salir.
+ * @author [Sergio Felipe Gonzalez Cruz]
+ * @date [15 de junio de 2025]
  */
 #include "Matrix.h"
 #include "Methods.h"

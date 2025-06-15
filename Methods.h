@@ -1,9 +1,10 @@
 /**
  * @file Methods.h
- * @brief Declaración del método para resolver sistemas de ecuaciones lineales mediante eliminación de Gauss.
+ * @brief Declaración del método para resolver sistemas de ecuaciones lineales mediante eliminación de Gauss y Gauss-Jordan.
  * 
  * Este archivo contiene la declaración de la función `gaussElimination`, que implementa el algoritmo
- * de eliminación de Gauss con pivoteo parcial para resolver sistemas de ecuaciones lineales Ax = b.
+ * de eliminación de Gauss con pivoteo parcial para resolver sistemas de ecuaciones lineales Ax = b y la función 'gaussJordanElimination' 
+ * que impplementa el algoritmo de eliminación de Gauss-Jordan.
  * 
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [11 de junio de 2025]

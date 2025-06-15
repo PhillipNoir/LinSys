@@ -4,10 +4,7 @@
  * 
  * @section features_sec Características principales.
  * -Método de eliminación de Gauss.
- * -Método de Gauss-Jordan (Por implementar).
- * -Método de LU (Por implementar).
- * -Método de QR (Por implementar).
- * -Método de mínimos cuadrados(Por implementar).
+ * -Método de Gauss-Jordan.
  * 
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [11 de junio de 2025]
