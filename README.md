@@ -56,7 +56,7 @@ Al iniciarse, le pedirá:
 
 ## Estado del proyecto
 
-Esta es la versión 0.4.2, considerada la primera version funcional completa.
+Esta es la versión 0.4.8.
 Se planean mejoras futuras como:
 - Validación de entradas.
 - Encapsulamiento.

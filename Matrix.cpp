@@ -29,6 +29,14 @@ Matrix::Matrix(int r, int c) : rows(r), cols(c) {
     }
 }
 
+int Matrix::getRows() const{
+    return rows;
+}
+
+int Matrix::getCols() const{
+    return cols;
+}
+
 /**
  * @brief Accede (con verificación de límites) a un elemento de la matriz.
  * 
@@ -67,7 +75,7 @@ void Matrix::fillMatrix() {
  * 
  * Utiliza `std::setw` para alinear columnas y mostrar la matriz de forma legible.
  */
-void Matrix::print() {
+void Matrix::print() const{
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             std::cout << std::setw(10) << matriz[i][j] << " ";

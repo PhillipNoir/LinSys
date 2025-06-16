@@ -4,6 +4,11 @@ Todas las modificaciones significativas de este proyecto serán documentadas en 
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).
 
+## [0.5.0] - 2025-06-18
+### Añadido.
+- Se implementa Matrix como class para orientación a objetos y se realizan los cambios en los métodos correspondientes para el correcto funcionamiento.
+- README actualizado.
+
 ## [0.4.7] - 2025-06-15
 ### Actualizado y añadido
 - Se elimina el versionado en la documentación del código y se deja únicamente el del repositorio ara evitar conflictos.
