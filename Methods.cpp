@@ -33,8 +33,10 @@
  * @param b Vector columna con los términos independientes (tipo Matrix).
  */
 void imprimirSistema(Matrix& A, Matrix& b) {
-    for (int i = 0; i < A.rows; ++i) {
-        for (int j = 0; j < A.cols; ++j) {
+    int rows = A.getRows();
+    int cols = A.getCols();
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
             std::cout << std::setw(10) << A.at(i, j) << " ";
         }
         std::cout << "| " << std::setw(10) << b.at(i, 0) << std::endl;
@@ -56,7 +58,7 @@ void imprimirSistema(Matrix& A, Matrix& b) {
  * @throw std::runtime_error Si el sistema no tiene solución única (pivote cero en la diagonal).
  */
 std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
-    int numEcuations = A.rows;
+    int numEcuations = A.getRows();
     bool mostrar = mostrarPasos && numEcuations <= 10;
 
     // Eliminación hacia adelante
@@ -140,7 +142,7 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
  * @throw std::runtime_error Si el sistema no tiene solución única (pivote cero en la diagonal).
  */
 std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPasos){
-    int numEcuations = A.rows;
+    int numEcuations = A.getRows();
 
     // Eliminación hacia adelante
     for (int column = 0; column < numEcuations; column++) {
