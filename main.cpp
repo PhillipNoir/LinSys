@@ -16,7 +16,6 @@
  * 
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [5 de junio de 2025]
- * @version [0.4.2]
  */
 #include "Matrix.h"
 #include "Methods.h"
