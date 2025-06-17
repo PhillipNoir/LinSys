@@ -9,7 +9,7 @@
  * @date [11 de junio de 2025]
  * 
  */
-#include "Matrix.h"
+#include "Matrix.hpp"
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>

@@ -1,5 +1,5 @@
 /**
- * @file Matrix.h
+ * @file Matrix.hpp
  * @brief Declaración de la clase Matrix para representar y manipular matrices dinámicas.
  * 
  * Proporciona una estructura de datos para matrices con gestión automática de memoria
@@ -8,8 +8,8 @@
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [11 de junio del 2025]
  */
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef MATRIX_HPP
+#define MATRIX_HPP
 
 #include <memory>
 

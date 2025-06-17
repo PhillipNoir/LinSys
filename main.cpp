@@ -17,11 +17,11 @@
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [5 de junio de 2025]
  */
-#include "Matrix.h"
-#include "Methods.h"
+#include "Matrix.hpp"
+#include "Methods.hpp"
 #include <iostream>
 #include <iomanip>
-#include "menu.h"
+#include "menu.hpp"
 
 /**
  * @brief Función principal del programa.

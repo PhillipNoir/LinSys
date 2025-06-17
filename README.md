@@ -56,10 +56,8 @@ Al iniciarse, le pedirá:
 
 ## Estado del proyecto
 
-Esta es la versión 0.4.8.
+Esta es la versión 0.6.0.
 Se planean mejoras futuras como:
-- Validación de entradas.
-- Encapsulamiento.
 - Interfaz más clara.
 
 ---

@@ -4,8 +4,15 @@ Todas las modificaciones significativas de este proyecto serán documentadas en 
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).
 
+## [0.6.0] - 2025-06-16
+## Actualizado
+- Se crea un utils.cpp y un utils.hpp para las funciones que se separaron de Methods.cpp
+- Se refactorizan múltiples funciones para mayor modularidad.
+- Se cambia la extensión de los .h a .hpp para C++ moderno puro.
+- README actualizado
+
 ## [0.5.0] - 2025-06-18
-### Añadido.
+### Añadido
 - Se implementa Matrix como class para orientación a objetos y se realizan los cambios en los métodos correspondientes para el correcto funcionamiento.
 - README actualizado.
 

@@ -9,10 +9,10 @@
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [11 de junio de 2025]
  */
-#ifndef METHODS_H
-#define METHODS_H
+#ifndef METHODS_HPP
+#define METHODS_HPP
 
-#include "Matrix.h"
+#include "Matrix.hpp"
 #include <vector>
 
 /**
@@ -31,5 +31,6 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos);
 
 std::vector<double> gaussJordanElimination(Matrix& A, Matrix&b, bool mostrarPasos);
 
+void imprimirSistema(Matrix& A, Matrix& b);
 
 #endif
