@@ -4,7 +4,7 @@ Todas las modificaciones significativas de este proyecto serán documentadas en 
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).
 
-## [0.6.1] - 2025-06-19
+## [0.6.2] - 2025-06-19
 ## Mejorado
 - Se crea un validations.cpp y un validations.cpp para validar evitar entradas de usuario incorrectas.
 - Se refactorizan funciones en utils.cpp y methods.cpp para evitar errores numéricos, manejar casos de infinitas soluciones y reportes de mal condicionamiento.
