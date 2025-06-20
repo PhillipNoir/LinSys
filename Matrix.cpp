@@ -13,6 +13,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
+#include "validations.hpp"
 
 /**
  * @brief Constructor de la clase Matrix.
@@ -65,7 +66,7 @@ void Matrix::fillMatrix() {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; ++j) {
             std::cout << "Ingrese el elemento (" << i << "," << j << "): ";
-            std::cin >> matriz[i][j];
+            matriz[i][j] = leerDecimal("");
         }
     }
 }

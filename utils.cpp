@@ -9,6 +9,7 @@
 void forwardElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
     int numEcuations = A.getRows();
     bool mostrar = mostrarPasos && numEcuations <= 10;
+    const double TOLERANCIA = 1e-12;
 
     for (int column = 0; column < numEcuations; column++) {
         // 1. Encontrar fila con el mayor pivote
@@ -22,9 +23,8 @@ void forwardElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
         }
 
         // 2. Verificar si hay solución
-        if (A.at(maxRow, column) == 0) {
-            //Si hay más ecuaciones que incógnitas, el sistema está sobredeterminado y no tiene solución
-            throw std::runtime_error("El sistema no tiene solución única o no tiene solución.");
+        if (std::abs(A.at(maxRow, column)) < TOLERANCIA) {
+            throw std::runtime_error("El sistema es numéricamente inestable o no tiene solución única.");
         }
 
         // 3. Intercambiar filas en A y b si es necesario
@@ -58,12 +58,27 @@ void forwardElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
             }
         }
     }
+    // 5. Verificación de filas nulas para detectar inconsistencia
+    for (int row = 0; row < numEcuations; ++row) {
+        bool filaNula = true;
+        for (int col = 0; col < numEcuations; ++col) {
+            if (std::abs(A.at(row, col)) > TOLERANCIA) {
+                filaNula = false;
+                break;
+            }
+        }
+        if (filaNula && std::abs(b.at(row, 0)) > TOLERANCIA) {
+            throw std::runtime_error("El sistema es inconsistente: no tiene solución.");
+        }
+    }
 }
 
 void backwardElimination(Matrix& A, Matrix& b, bool mostrarPasos){
     //Eliminar hacia atrás
     int numEcuations = A.getRows();
     bool mostrar = mostrarPasos && numEcuations <= 10;
+    const double TOLERANCIA = 1e-12;
+
     //El ciclo inicia para modificar la última fila
     for (int column = numEcuations - 1; column >= 0; column--) {
         for (int row = column - 1; row >= 0; row--) {
@@ -81,13 +96,15 @@ void backwardElimination(Matrix& A, Matrix& b, bool mostrarPasos){
     // Normalización de pivotes (hacerlos 1)
     for (int rows = 0; rows < numEcuations; rows++) {
         double pivot = A.at(rows, rows);
-        if (pivot == 0) {
-            throw std::runtime_error("Pivote nulo detectado, sistema incompatible o mal condicionado.");
+        if (std::abs(pivot) < TOLERANCIA) {
+            throw std::runtime_error("Pivote demasiado pequeño, posible sistema incompatible o mal condicionado.");
         }
-        for (int col = 0; col < numEcuations; col++) {
-            A.at(rows, col) /= pivot;
+        if (std::abs(pivot - 1.0) > TOLERANCIA) {
+            for (int col = 0; col < numEcuations; col++) {
+                A.at(rows, col) /= pivot;
+            }
+            b.at(rows, 0) /= pivot;
         }
-        b.at(rows, 0) /= pivot;
         if (mostrarPasos) {
             std::cout << "Normalizando fila " << rows << ":\n";
             imprimirSistema(A, b);

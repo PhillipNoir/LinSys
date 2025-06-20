@@ -64,6 +64,8 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
     // Sustitución regresiva
     int numEcuations = A.getRows();
     std::vector<double> vectorSolucion(numEcuations);
+    const double TOLERANCIA = 1e-12;
+
     for (int row = numEcuations - 1; row >= 0; row--) {
         //Suma de los elementos ya conocidos
         double sum {0.0};
@@ -72,6 +74,13 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
             //Se suma la multiplicación del coeficiente por el valor que ya conocemos, lo hace para todos los valores ya conocidos
             sum += A.at(row, col) * vectorSolucion[col];
         }
+        
+        double denom = A.at(row, row);
+        
+        if (std::abs(denom) < TOLERANCIA) {
+            throw std::runtime_error("División por cero o sistema mal condicionado en sustitución regresiva.");
+        }
+
         //Despeja la variable desconocida pasando la suma como resta y el coeficiente como cosciente para resolver la incógnita y almacena el resultado en el último espacio libre del vector para que se acomoden de forma ordenada
         vectorSolucion[row] = (b.at(row, 0) - sum) / A.at(row, row);
     }
@@ -97,8 +106,18 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPas
 
     backwardElimination(A, b, mostrarPasos);
 
-    //Guardado del vector solución
     int numEcuations = A.getRows();
+    const double TOLERANCIA = 1e-10;
+
+    for (int row = 0; row < numEcuations; row++) {
+        for (int col = 0; col < numEcuations; col++) {
+            if ((row == col && std::abs(A.at(row, col) - 1.0) > TOLERANCIA) || (row != col && std::abs(A.at(row, col)) > TOLERANCIA)) {
+                throw std::runtime_error("La matriz no se redujo completamente a la identidad. El sistema puede estar mal condicionado.");
+            }
+        }
+    }
+
+    //Guardado del vector solución
     std::vector<double> vectorSolucion(numEcuations);
     for (int sol = 0; sol < numEcuations; sol++)
     {
