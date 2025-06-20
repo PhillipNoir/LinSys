@@ -28,7 +28,8 @@ Diseñado como una herramienta educativa y funcional, es ideal para estudiantes 
 
 Al llegar la versión 1.0.0 añadiré el ejecutable directo, mientras tanto, para ejecutarlo recomiendo crear un archivo .bat en la carpeta donde guarde los archivos del programa con el siguiente contenido:
 
-![image](https://github.com/user-attachments/assets/ba6c2e0f-850b-4bd0-b94c-51e2c74c34bd)
+![image](https://github.com/user-attachments/assets/cbfb1209-e401-4c3b-9e1b-c12c1d274141)
+
 
 
 Para después dar click en el .bat para ejecutarlo.
