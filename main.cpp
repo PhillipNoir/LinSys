@@ -17,6 +17,9 @@
  * @author [Sergio Felipe Gonzalez Cruz]
  * @date [5 de junio de 2025]
  */
+#ifdef _WIN32
+#include<windows.h>
+#endif
 #include "Matrix.hpp"
 #include "Methods.hpp"
 #include <iostream>
@@ -33,6 +36,10 @@
  * @return int Código de salida del programa (0 si finaliza correctamente).
  */
 int main() {
+    #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+    #endif
     menuPrincipal();
     return 0;
 }

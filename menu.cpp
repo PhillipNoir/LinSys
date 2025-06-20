@@ -37,7 +37,7 @@ void menuPrincipal(){
     while (continuar)
     {
         std::cout<<"\nPor favor, elija el método por el cual deseas resolver tu sistema de ecuaciones lineales o selecciona la opción 'Salir' para terminar el programa: \n";
-        std::cout << "1. Método de Gauss\n";
+        std::cout << "\n1. Método de Gauss\n";
         std::cout << "2. Método de Gauss-Jordan\n";
         std::cout << "3. Salir\n";
         opcion = leerEntero("Su elección: ");
@@ -46,15 +46,15 @@ void menuPrincipal(){
         switch (opcion)
         {
         case 1: {
-            size = leerEntero("Ingrese el tamaño de la matriz: ");
+            size = leerEntero("\nIngrese el tamaño de la matriz: ");
             std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
             Matrix A(size, size);
             Matrix b (size, 1);
-            std::cout << "Ingrese la matriz A:\n";
+            std::cout << "\nIngrese la matriz A:\n";
             A.fillMatrix();
-            std::cout << "Ingrese el vector b:\n";
+            std::cout << "\nIngrese el vector b:\n";
             b.fillMatrix();
-            mostrarPasos = leerBooleano("¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
+            mostrarPasos = leerBooleano("\n¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
             std::vector<double> solution = gaussElimination(A, b, mostrarPasos);
             advertenciaSistemaGrande(size);
             std::cout << "Solución:\n";
@@ -65,15 +65,15 @@ void menuPrincipal(){
             break;
         }
         case 2: {
-            size = leerEntero("Ingrese el tamaño de la matriz: ");
+            size = leerEntero("\nIngrese el tamaño de la matriz: ");
             std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
             Matrix A(size, size);
             Matrix b (size, 1);
-            std::cout << "Ingrese la matriz A:\n";
+            std::cout << "\nIngrese la matriz A:\n";
             A.fillMatrix();
-            std::cout << "Ingrese el vector b:\n";
+            std::cout << "\nIngrese el vector b:\n";
             b.fillMatrix();
-            mostrarPasos = leerBooleano("¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
+            mostrarPasos = leerBooleano("\n¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
             std::vector<double> solution = gaussJordanElimination(A, b, mostrarPasos);
             advertenciaSistemaGrande(size);
             std::cout << "Solución:\n";
