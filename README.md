@@ -57,7 +57,7 @@ Al iniciarse, le pedirá:
 
 ## Estado del proyecto
 
-Esta es la versión 0.6.2.
+Esta es la versión 0.7.0.
 Se planean mejoras futuras como:
 - Interfaz más clara.
 
