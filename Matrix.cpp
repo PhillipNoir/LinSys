@@ -3,10 +3,8 @@
  * @brief Implementación de la clase Matrix para representar y manipular matrices dinámicas.
  * 
  * @section features_sec Características principales
- * -Esta estructura proporciona métodos para acceder, llenar e imprimir matrices, utilizando punteros inteligentes para una gestión segura de memoria dinámica lo que permite correrlo en cualquier equipo.
+ * -Esta clase proporciona métodos para acceder, llenar e imprimir matrices, utilizando punteros inteligentes para una gestión segura de memoria dinámica lo que permite correrlo en cualquier equipo.
  * -Forma parte del módulo de resolución de sistemas de ecuaciones lineales.
- * @author [Sergio Felipe Gonzalez Cruz]
- * @date [11 de junio de 2025]
  * 
  */
 #include "Matrix.hpp"

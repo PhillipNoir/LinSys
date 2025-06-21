@@ -4,6 +4,13 @@ Todas las modificaciones significativas de este proyecto serán documentadas en 
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).
 
+## [1.0.0] - 2025-06-20
+## Actualizado
+- Se agrega documentación Doxygen al proyecto en HTML y PDF.
+- Se actualiza el README.md con el logo del proyecto y logo del desarrollador.
+- Se mejora lijeramente la interfaz.
+- Se actualiza documentación y se agrega documentación Doxygen a utils.cpp, utils.hpp, validations.cpp y validations.hpp.
+
 ## [0.7.0] - 2025-06-20
 ## Actualizado
 - Se mejora la presentación de la interfaz y se resuelven los errores de compatibilidad con letras españolas en windows.

@@ -4,8 +4,6 @@
  * 
  * Este archivo contiene la declaración de la función `menuPrincipal`.
  * 
- * @author [Sergio Felipe Gonzalez Cruz]
- * @date [11 de junio de 2025]
  */
 #pragma once
 

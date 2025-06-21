@@ -6,8 +6,6 @@
  * -Método de eliminación de Gauss.
  * -Método de Gauss-Jordan.
  * 
- * @author [Sergio Felipe Gonzalez Cruz]
- * @date [11 de junio de 2025]
  */
 #include "Methods.hpp"
 #include "Matrix.hpp"
@@ -77,6 +75,7 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
         
         double denom = A.at(row, row);
         
+        //Envía un mensaje de error donde ocurre una división por cero durante la sustitución regresiva para evitar bugs o que el programa se rompa.
         if (std::abs(denom) < TOLERANCIA) {
             throw std::runtime_error("División por cero o sistema mal condicionado en sustitución regresiva.");
         }

@@ -1,8 +1,12 @@
-# linear-system-solver
+@mainpage LinSys++
+
+# LinSys++
 Solución de sistemas lineales por Gaus y Gauss-Jordan en C++. Linear system solver using Gaussian methods
 
 Este es un programa de consola en **C++ puro** que permite resolver sistemas de ecuaciones lineales utilizando los métodos de **eliminación de Gauss** y **eliminación Gauss-Jordan**.
 Diseñado como una herramienta educativa y funcional, es ideal para estudiantes de ingeniería, álgebra lineal o métodos numéricos.
+
+![LinSys++Logo](img/LinSys++Logo.png)
 
 ---
 
@@ -24,17 +28,7 @@ Diseñado como una herramienta educativa y funcional, es ideal para estudiantes 
 
 ## Uso
 
-### 1. Compilar
-
-Al llegar la versión 1.0.0 añadiré el ejecutable directo, mientras tanto, para ejecutarlo recomiendo crear un archivo .bat en la carpeta donde guarde los archivos del programa con el siguiente contenido:
-
-![image](https://github.com/user-attachments/assets/cbfb1209-e401-4c3b-9e1b-c12c1d274141)
-
-
-
-Para después dar click en el .bat para ejecutarlo.
-
-### 2. Ejecutar
+### 1. Ejecutar
 
 El programa se ejecuta en consola.
 Al iniciarse, le pedirá:
@@ -46,21 +40,19 @@ Al iniciarse, le pedirá:
 - Pregunta si desea que se muestren los pasos de la solución (ingresar 1 para si, 0 para no).
 - Puede hacer cuantos sistemas desee, para salir debe seleccionar la opción 3.
 
-### 3. Ejemplo de entrada
+### 2. Ejemplo de entrada
 
-![image](https://github.com/user-attachments/assets/35fc9ecd-2866-4385-95dc-28b81dbd0f1b)
+![Entrada](img/ScreenshootEntrada.png)
 
-### 4. Ejemplo de salida
+### 3. Ejemplo de salida
 
-![image](https://github.com/user-attachments/assets/47611d3e-0d64-49f1-a0f0-894fe3675480)
+![Salida](img/ScreenshotSalida.png)
 
 ---
 
 ## Estado del proyecto
 
-Esta es la versión 0.7.0.
-Se planean mejoras futuras como:
-- Interfaz más clara.
+Esta es la versión de lanzamiento oficial 1.0.0
 
 ---
 
@@ -88,3 +80,5 @@ https://coff.ee/phillipnoir
 O con paypal directamente:
 
 https:://www.paypal.me/CienceMessiah
+
+![DevLogo](img/PhillipNoirPersonalLogo.png)

@@ -5,8 +5,6 @@
  * Proporciona una estructura de datos para matrices con gestión automática de memoria
  * mediante punteros inteligentes y métodos para acceso seguro, llenado e impresión.
  *
- * @author [Sergio Felipe Gonzalez Cruz]
- * @date [11 de junio del 2025]
  */
 #ifndef MATRIX_HPP
 #define MATRIX_HPP
