@@ -21,8 +21,7 @@ Diseñado como una herramienta educativa y funcional, es ideal para estudiantes 
 
 ## Requisitos
 
-- **Compilador C++** compatible con C++11 o superior.
-- Sistema operativocon consola (Windows, Linux, macOS).
+- Sistema operativo con consola (Windows, Linux, macOS).
 
 ---
 
