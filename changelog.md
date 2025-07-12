@@ -4,11 +4,18 @@ Todas las modificaciones significativas de este proyecto serán documentadas en 
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).
 
+## [1.1.0] - 2025-07-12
+## Actualizado
+- Se agrega documentación Doxygen a validations.cpp.
+- README.md actualizado con el nuevo método.
+- Se implementa el método de Jacobi como alternativa para sistemas grandes y equipos de bajos recursos.
+- Actualización de la documentación para incluir el nuevo método.
+
 ## [1.0.0] - 2025-06-20
 ## Actualizado
 - Se agrega documentación Doxygen al proyecto en HTML y PDF.
 - Se actualiza el README.md con el logo del proyecto y logo del desarrollador.
-- Se mejora lijeramente la interfaz.
+- Se mejora ligeramente la interfaz.
 - Se actualiza documentación y se agrega documentación Doxygen a utils.cpp, utils.hpp, validations.cpp y validations.hpp.
 
 ## [0.7.0] - 2025-06-20

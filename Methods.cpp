@@ -15,6 +15,7 @@
 #include <iostream>
 #include <iomanip>
 #include "utils.hpp"
+#include <string>
 
 /**
  * @brief Imprime el sistema de ecuaciones lineales en forma matricial.
@@ -124,4 +125,69 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPas
     }
     
     return vectorSolucion;
+}
+
+/**
+ * @brief Resuelve un sistema de ecuaciones lineales mediante el método iterativo de Jacobi.
+ * 
+ * Este método utiliza iteraciones sucesivas para aproximar la solución del sistema Ax = b.
+ * Requiere que la matriz A tenga diagonal dominante para garantizar convergencia.
+ * 
+ * @param A Matriz de coeficientes del sistema (no se modifica).
+ * @param b Vector columna de términos independientes (no se modifica).
+ * @param mostrarPasos Si true, muestra el progreso de las iteraciones.
+ * @param tolerancia Criterio de parada para la convergencia (por defecto 1e-6).
+ * @param maxIteraciones Número máximo de iteraciones permitidas (por defecto 1000).
+ * @return std::vector<double> Vector solución del sistema.
+ * 
+ * @throw std::runtime_error Si hay ceros en la diagonal o no converge.
+ */
+std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones) {
+    int numEquations = A.getRows();
+    const double TOLERANCIA_DIAGONAL = 1e-12;
+    
+    
+    // Verificar que no hay ceros en la diagonal
+    for (int i = 0; i < numEquations; ++i) {
+        if (std::abs(A.at(i, i)) < TOLERANCIA_DIAGONAL) {
+            throw std::runtime_error("Cero en la diagonal principal en posición (" + std::to_string(i) + "," + std::to_string(i) + "). El método de Jacobi no puede continuar.");
+        }
+    }
+    
+    // Inicializar el vector solución y el vector solución anterior
+    std::vector<double> vectorSolucion(numEquations, 0.0);
+    std::vector<double> vectorSolucionAnterior(numEquations, 0.0);
+    
+    for (int iter = 0; iter < maxIteraciones; ++iter) {
+        //Se copia el vector solución actual al vector solución anterior para calcular el error
+        vectorSolucionAnterior = vectorSolucion;
+        
+        // Calcular nueva aproximación
+        for (int i = 0; i < numEquations; ++i) {
+            double suma = 0.0;
+            
+            for (int j = 0; j < numEquations; ++j) {
+                if (i != j) {
+                    suma += A.at(i, j) * vectorSolucionAnterior[j];
+                }
+            }
+            
+            vectorSolucion[i] = (b.at(i, 0) - suma) / A.at(i, i);
+        }
+        
+        // Calcular error máximo
+        double error = 0.0;
+        for (int i = 0; i < numEquations; ++i) {
+            error = std::max(error, std::abs(vectorSolucion[i] - vectorSolucionAnterior[i]));
+        }
+        
+        // Verificar convergencia
+        if (error < tolerancia) {
+                std::cout << "\n¡Convergencia alcanzada en " << iter + 1 << " iteraciones!" << std::endl;
+                std::cout << "Error final: " << std::scientific << error << std::endl;
+            return vectorSolucion;
+        }
+    }
+    
+    throw std::runtime_error("El método de Jacobi no convergió en " + std::to_string(maxIteraciones) + " iteraciones. " + "Verifique que la matriz tenga diagonal dominante.");
 }

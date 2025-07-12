@@ -54,4 +54,22 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix&b, bool mostrarPaso
  */
 void imprimirSistema(Matrix& A, Matrix& b);
 
+/**
+ * @brief Resuelve un sistema de ecuaciones lineales mediante el método iterativo de Jacobi.
+ * 
+ * Este método utiliza iteraciones sucesivas para aproximar la solución del sistema Ax = b.
+ * Requiere que la matriz A tenga diagonal dominante para garantizar convergencia.
+ * 
+ * @param A Matriz de coeficientes del sistema (no se modifica).
+ * @param b Vector columna de términos independientes (no se modifica).
+ * @param mostrarPasos Si true, muestra el progreso de las iteraciones.
+ * @param tolerancia Criterio de parada para la convergencia (por defecto 1e-6).
+ * @param maxIteraciones Número máximo de iteraciones permitidas (por defecto 1000).
+ * @return std::vector<double> Vector solución del sistema.
+ * 
+ * @throw std::runtime_error Si hay ceros en la diagonal o no converge.
+ */
+std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones);
+
+
 #endif

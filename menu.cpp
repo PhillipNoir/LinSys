@@ -14,6 +14,8 @@
  * - Salir del programa
  * 
  * La función se ejecuta en un bucle hasta que el usuario selecciona la opción de salir.
+ * @author [Sergio Felipe Gonzalez Cruz]
+ * @date [15 de junio de 2025]
  */
 #include "Matrix.hpp"
 #include "Methods.hpp"
@@ -32,77 +34,81 @@ void menuPrincipal(){
     int size{0};
     bool mostrarPasos{true};
 
-    //Este bucle muestra el menú principal tras cada iteración hasta que el usuario indique que desea salir.
     while (continuar)
     {
-        std::cout<<"\nPor favor, elija el método por el cual desea resolver su sistema de ecuaciones lineales o selecciona la opción 'Salir' para terminar el programa: \n";
-        std::cout << "\n1. Método de Gauss\n";
+        std::cout << "\nPor favor, elija el método por el cual deseas resolver tu sistema de ecuaciones lineales o selecciona la opción 'Salir' para terminar el programa: \n";
+        std::cout << "1. Método de Gauss\n";
         std::cout << "2. Método de Gauss-Jordan\n";
-        std::cout << "3. Salir\n";
+        std::cout << "3. Método de Jacobi\n";
+        std::cout << "4. Salir\n";
+        std::cout << "\nNotas:\n";
+        std::cout << "- Los métodos de Gauss y Gauss-Jordan son generalmente más rápidos para sistemas pequeños y medianos.\n";
+        std::cout << "- Para sistemas de ecuaciones muy grandes o en equipos con recursos limitados, el método de Jacobi es más robusto y eficiente en el uso de memoria, aunque puede requerir más iteraciones para converger.\n";
+        std::cout << "- Los métodos de Gauss y Gauss-Jordan pueden ser menos adecuados para equipos de bajos recursos con sistemas muy grandes debido a su mayor consumo de memoria.\n";
         opcion = leerEntero("Su elección: ");
-        //Si el usuario ingresa un decimal en una entrada para entero, solo se toma la parte entera de esa entrada, es importante avisar de esto al usuario.
         std::cout << "Entrada registrada como " << opcion << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
 
         switch (opcion)
         {
         case 1: {
-            size = leerEntero("\nIngrese el tamaño de la matriz: ");
+            size = leerEntero("Ingrese el tamaño de la matriz: ");
             std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
-            //Se inicializan los objetos A y b, ambos del tipo matrix
             Matrix A(size, size);
             Matrix b (size, 1);
-            std::cout << "\nIngrese la matriz A:\n";
+            std::cout << "Ingrese la matriz A:\n";
             A.fillMatrix();
-            std::cout << "\nIngrese el vector b:\n";
+            std::cout << "Ingrese el vector b:\n";
             b.fillMatrix();
-            //Se muestra  al usuario el sistema que ingresó para validación
-            std::cout<<"\n Usted ha ingresado el siguiente sistema: \n";
-            imprimirSistema(A, b);
-            //Se usa una entrada booleana para saber si el usuario desea conocer los pasos o únicamente la solución
-            mostrarPasos = leerBooleano("\n¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
+            mostrarPasos = leerBooleano("¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
             std::vector<double> solution = gaussElimination(A, b, mostrarPasos);
             advertenciaSistemaGrande(size);
             std::cout << "Solución:\n";
     
-            //Se imprime la solución al sistema.
             for (double val : solution) {
                 std::cout << std::setw(10) << val << " ";
             }
-            std::cout<<"\n";
             break;
         }
         case 2: {
-            size = leerEntero("\nIngrese el tamaño de la matriz: ");
+            size = leerEntero("Ingrese el tamaño de la matriz: ");
             std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
-            //Se inicializan los ojetos A y b del tipo Matix
             Matrix A(size, size);
             Matrix b (size, 1);
-            std::cout << "\nIngrese la matriz A:\n";
+            std::cout << "Ingrese la matriz A:\n";
             A.fillMatrix();
-            std::cout << "\nIngrese el vector b:\n";
+            std::cout << "Ingrese el vector b:\n";
             b.fillMatrix();
-
-            //Se muestra al usuario el sistema que ingresó para validación.
-            std::cout<<"\n Usted ha ingresado el siguiente sistema: \n";
-            imprimirSistema(A, b);
-            //Se usa una entrada booleana para saber si el usuario desea conocer los pasos de la solución
-            mostrarPasos = leerBooleano("\n¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
+            mostrarPasos = leerBooleano("¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
             std::vector<double> solution = gaussJordanElimination(A, b, mostrarPasos);
             advertenciaSistemaGrande(size);
-            //Se imprime la solución
             std::cout << "Solución:\n";
     
             for (double val : solution) {
                 std::cout << std::setw(10) << val << " ";
             }
-            std::cout<<"\n";
             break;
         }
-        //Termina el programa si elige la opción 3.
-        case 3:
-            continuar = false;
+        case 3: {
+            // Para el método de Jacobi, no se requiere mostrar pasos intermedios
+            size = leerEntero("Ingrese el tamaño de la matriz: ");
+            std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
+            Matrix A(size, size);
+            Matrix b (size, 1);
+            std::cout << "Ingrese la matriz A:\n";
+            A.fillMatrix();
+            std::cout << "Ingrese el vector b:\n";
+            b.fillMatrix();
+            std::vector<double> solution = jacobiMethod(A, b, 1e-6, 500);
+            std::cout << "Solución:\n";
+            for (double val : solution) {
+                std::cout << std::setw(10) << val << " ";
+            }
             break;
-        //Caso default por si el usuario ingresa una entrada no contemplada.
+        }
+        case 4: 
+            continuar = false;
+            std::cout << "Gracias por usar el programa. ¡Hasta luego!\n";
+            break;
         default:
             std::cout << "Opción inválida.\n";
             break;

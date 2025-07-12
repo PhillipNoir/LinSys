@@ -1,3 +1,8 @@
+/*@file validations.cpp
+ * @brief Funciones de validación y lectura de entradas del usuario.
+ * Este archivo contiene funciones para validar entradas del usuario y leer valores enteros, decimales y boolean
+*/
+
 #include "Matrix.hpp"
 #include "Methods.hpp"
 #include <iostream>
@@ -6,6 +11,14 @@
 #include "menu.hpp"
 #include <limits>
 
+/**
+ * @brief Muestra una advertencia si el sistema es demasiado grande.
+ * 
+ * Esta función imprime un mensaje de advertencia si el tamaño del sistema es mayor a 10,
+ * sugiriendo que se mostrarán solo los resultados finales para evitar sobrecargar la consola.
+ * 
+ * @param size Tamaño del sistema de ecuaciones.
+ */
 void advertenciaSistemaGrande(int size){
     bool mostrarPasos = size<11;
     if (mostrarPasos == false)
@@ -15,6 +28,15 @@ void advertenciaSistemaGrande(int size){
     
 }
 
+/**
+ * @brief Lee un número entero desde la entrada estándar.
+ * 
+ * Esta función solicita al usuario que ingrese un número entero y valida la entrada.
+ * Si la entrada no es válida, solicita al usuario que vuelva a intentarlo.
+ * 
+ * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
+ * @return int El número entero ingresado por el usuario.
+ */
 int leerEntero(const std::string& mensaje) {
     int valor;
     while (true) {
@@ -32,6 +54,15 @@ int leerEntero(const std::string& mensaje) {
     }
 }
 
+/**
+ * @brief Lee un número decimal desde la entrada estándar.
+ * 
+ * Esta función solicita al usuario que ingrese un número decimal y valida la entrada.
+ * Si la entrada no es válida, solicita al usuario que vuelva a intentarlo.
+ * 
+ * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
+ * @return double El número decimal ingresado por el usuario.
+ */
 double leerDecimal(const std::string& mensaje) {
     double valor;
     while (true) {
@@ -49,6 +80,15 @@ double leerDecimal(const std::string& mensaje) {
     }
 }
 
+/**
+ * @brief Lee un valor booleano desde la entrada estándar.
+ * 
+ * Esta función solicita al usuario que ingrese un valor booleano (1 para verdadero, 0 para falso)
+ * y valida la entrada. Si la entrada no es válida, solicita al usuario que vuelva a intentarlo.
+ * 
+ * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
+ * @return bool El valor booleano ingresado por el usuario.
+ */
 bool leerBooleano(const std::string& mensaje) {
     int entrada;
     while (true) {

@@ -1,6 +1,6 @@
 /**
  * @file utils.cpp
- * @brief Modulacización de funciones que se repiten o pueden repetirse
+ * @brief Modularización de funciones que se repiten o pueden repetirse
  * 
  * Este archivo contiene la declaración de las funciones forwardElimination y backward elimination, las cuales, son usadas en los métodos
  * de solución de sistemas lineales implementados en este programa.
