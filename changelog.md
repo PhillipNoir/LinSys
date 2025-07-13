@@ -4,6 +4,14 @@ Todas las modificaciones significativas de este proyecto serán documentadas en 
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).
 
+## [1.2.1] - 2025-07-13
+## Refactorizado
+- Eliminación de std::vector en todos los métodos numéricos para la solución de sistemas de ecuaciones lineales.
+- Todos los métodos (gaussElimination, Gauss-Jordan, Jacobi y Gauss-Seidel) ahora utilizan exclusivamente la clase Matrix para representar y devolver soluciones, asegurando compatibilidad con sistemas donde la STL está limitada.
+- Los métodos iterativos ahora lanzan una excepción si no convergen, garantizando un comportamiento consistente y seguro.
+- El código es ahora más portable, facil de mantener y extender, y permite un control total sobre la representación y manipulación de matrices.
+- Proximamente se eliminará std::string para una mayor compatibilidad y portabilidad sin necesidad de la STL.
+
 ## [1.2.0] - 2025-07-12
 ## Actualizado
 - README.md actualizado con el nuevo método.

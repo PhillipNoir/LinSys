@@ -6,7 +6,6 @@
  * de solución de sistemas lineales implementados en este programa.
  */
 #include "Matrix.hpp"
-#include <vector>
 #include <stdexcept>
 #include <cmath>
 #include <iostream>

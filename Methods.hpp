@@ -11,7 +11,6 @@
 #define METHODS_HPP
 
 #include "Matrix.hpp"
-#include <vector>
 
 /**
  * @brief Resuelve un sistema de ecuaciones lineales mediante el método de eliminación de Gauss con pivoteo parcial.
@@ -22,11 +21,11 @@
  * @param A Matriz cuadrada de coeficientes del sistema (modificada durante la ejecución).
  * @param b Vector columna de términos independientes (modificado durante la ejecución).
  * @param mostrarPasos Indica si el usuario desea conocer los pasos de la solución al sistema.
- * @return std::vector<double> Vector solución del sistema.
+ * @return Matrix vectorSolución solución del sistema.
  * 
  * @throw std::runtime_error Si el sistema no tiene solución única o puede estar mal condicionado.
  */
-std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos);
+Matrix gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos);
 
 /**
  * @brief Resuelve un sistema de ecuaciones lineales mediante el método de Gauss-Jordan.
@@ -37,11 +36,11 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos);
  * @param A Matriz cuadrada de coeficientes del sistema (modificada durante la ejecución)
  * @param b Vector columna de términos independientes (modificado durante la ejecución)
  * @param mostrarPasos Indica si el usuario desea conocer los pasos de la solución al sistema
- * @return ** std::vector<double> 
+ * @return Matrix vectorSolución solución del sistema. 
  * 
  * @throw std::runtime_error Si el sistema no tiene solución unica o puede estar mal condicionado.
  */
-std::vector<double> gaussJordanElimination(Matrix& A, Matrix&b, bool mostrarPasos);
+Matrix gaussJordanElimination(Matrix& A, Matrix&b, bool mostrarPasos);
 
 /**
  * @brief Imprime un sistema de ecuaciones lineales en forma matricial.
@@ -65,11 +64,11 @@ void imprimirSistema(Matrix& A, Matrix& b);
  * @param mostrarPasos Si true, muestra el progreso de las iteraciones.
  * @param tolerancia Criterio de parada para la convergencia (por defecto 1e-6).
  * @param maxIteraciones Número máximo de iteraciones permitidas (por defecto 1000).
- * @return std::vector<double> Vector solución del sistema.
+ * @return Matrix vectorSolución solución del sistema.
  * 
  * @throw std::runtime_error Si hay ceros en la diagonal o no converge.
  */
-std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones);
+Matrix jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones);
 
 /**
  * @brief Resuelve un sistema de ecuaciones lineales mediante el método iterativo de Gauss-Seidel.
@@ -85,6 +84,6 @@ std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int ma
  * 
  * @throw std::runtime_error Si hay ceros en la diagonal principal o si no converge.
  */
-std::vector<double> gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter);
+Matrix gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter);
 
 #endif

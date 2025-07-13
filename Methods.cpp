@@ -9,7 +9,6 @@
  */
 #include "Methods.hpp"
 #include "Matrix.hpp"
-#include <vector>
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
@@ -53,16 +52,16 @@ void imprimirSistema(Matrix& A, Matrix& b) {
  * 
  * @param A Matriz de coeficientes del sistema (modificada durante la ejecución).
  * @param b Vector columna de términos independientes (modificado durante la ejecución).
- * @return std::vector<double> Vector solución del sistema.
+ * @return Matrix vectorSolución solución del sistema.
  * 
  * @throw std::runtime_error Si el sistema no tiene solución única (pivote cero en la diagonal).
  */
-std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
+Matrix gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
     forwardElimination(A, b, mostrarPasos);
 
     // Sustitución regresiva
     int numEcuations = A.getRows();
-    std::vector<double> vectorSolucion(numEcuations);
+    Matrix vectorSolucion(numEcuations, 1);
     const double TOLERANCIA = 1e-12;
 
     for (int row = numEcuations - 1; row >= 0; row--) {
@@ -71,7 +70,7 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
         //Este ciclo se activa si columna es menor al numero de ecuaciones, lo que nos dice que hay valor a la derecha
         for (int col = row + 1; col < numEcuations; col++) {
             //Se suma la multiplicación del coeficiente por el valor que ya conocemos, lo hace para todos los valores ya conocidos
-            sum += A.at(row, col) * vectorSolucion[col];
+            sum += A.at(row, col) * vectorSolucion.at(col, 0);
         }
         
         double denom = A.at(row, row);
@@ -82,7 +81,7 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
         }
 
         //Despeja la variable desconocida pasando la suma como resta y el coeficiente como cosciente para resolver la incógnita y almacena el resultado en el último espacio libre del vector para que se acomoden de forma ordenada
-        vectorSolucion[row] = (b.at(row, 0) - sum) / A.at(row, row);
+        vectorSolucion.at(row, 0) = (b.at(row, 0) - sum) / A.at(row, row);
     }
     //Retorna el vector solución
     return vectorSolucion;
@@ -97,11 +96,11 @@ std::vector<double> gaussElimination(Matrix& A, Matrix& b, bool mostrarPasos) {
  * 
  * @param A Matriz de coeficientes del sistema (modificada durante la ejecución).
  * @param b Vector columna de términos independientes (modificado durante la ejecución).
- * @return std::vector<double> Vector solución del sistema.
+ * @return Matrix vectorSolución solución del sistema.
  * 
  * @throw std::runtime_error Si el sistema no tiene solución única (pivote cero en la diagonal).
  */
-std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPasos){
+Matrix gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPasos){
     forwardElimination(A, b, mostrarPasos);
 
     backwardElimination(A, b, mostrarPasos);
@@ -118,10 +117,10 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPas
     }
 
     //Guardado del vector solución
-    std::vector<double> vectorSolucion(numEcuations);
+    Matrix vectorSolucion(numEcuations, 1);
     for (int sol = 0; sol < numEcuations; sol++)
     {
-        vectorSolucion[sol] = b.at (sol, 0);
+        vectorSolucion.at(sol, 0) = b.at(sol, 0);
     }
     
     return vectorSolucion;
@@ -142,7 +141,7 @@ std::vector<double> gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPas
  * 
  * @throw std::runtime_error Si hay ceros en la diagonal o no converge.
  */
-std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones) {
+Matrix jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones) {
     int numEquations = A.getRows();
     const double TOLERANCIA_DIAGONAL = 1e-12;
     
@@ -155,12 +154,21 @@ std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int ma
     }
     
     // Inicializar el vector solución y el vector solución anterior
-    std::vector<double> vectorSolucion(numEquations, 0.0);
-    std::vector<double> vectorSolucionAnterior(numEquations, 0.0);
+    Matrix vectorSolucion(numEquations, 1);
+    Matrix vectorSolucionAnterior(numEquations, 1);
     
+    // Inicializar los vectores solución con ceros
+    // Esto asegura que los vectores tengan el tamaño correcto y estén listos para las iteraciones
+    for (int i = 0; i < numEquations; ++i) {
+        vectorSolucion.at(i, 0) = 0.0;
+        vectorSolucionAnterior.at(i, 0) = 0.0;
+    }
+
     for (int iter = 0; iter < maxIteraciones; ++iter) {
         //Se copia el vector solución actual al vector solución anterior para calcular el error
-        vectorSolucionAnterior = vectorSolucion;
+        for (int i = 0; i < numEquations; ++i) {
+            vectorSolucionAnterior.at(i, 0) = vectorSolucion.at(i, 0);
+        }
         
         // Calcular nueva aproximación
         for (int i = 0; i < numEquations; ++i) {
@@ -168,17 +176,17 @@ std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int ma
             
             for (int j = 0; j < numEquations; ++j) {
                 if (i != j) {
-                    suma += A.at(i, j) * vectorSolucionAnterior[j];
+                    suma += A.at(i, j) * vectorSolucionAnterior.at(j, 0);
                 }
             }
             
-            vectorSolucion[i] = (b.at(i, 0) - suma) / A.at(i, i);
+            vectorSolucion.at(i,0) = (b.at(i, 0) - suma) / A.at(i, i);
         }
         
         // Calcular error máximo
         double error = 0.0;
         for (int i = 0; i < numEquations; ++i) {
-            error = std::max(error, std::abs(vectorSolucion[i] - vectorSolucionAnterior[i]));
+            error = std::max(error, std::abs(vectorSolucion.at(i,0) - vectorSolucionAnterior.at(i,0)));
         }
         
         // Verificar convergencia
@@ -202,7 +210,7 @@ std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int ma
  * @return std::vector<double> Vector solución del sistema.
  * @throw std::runtime_error Si hay ceros en la diagonal principal o si no converge.
  */
-std::vector<double> gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter) {
+Matrix gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter) {
     // Verificar que no hay ceros en la diagonal
     int numEquations = A.getRows();
     const double TOLERANCIA_DIAGONAL = 1e-12;
@@ -211,26 +219,34 @@ std::vector<double> gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, i
             throw std::runtime_error("Cero en la diagonal principal en posición (" + std::to_string(i) + "," + std::to_string(i) + "). El método no puede continuar.");
         }
     }
-    std::vector<double> vectorSolucion(numEquations, 0.0);
-    std::vector<double> vectorSolucionCopia(numEquations, 0.0);
+    // Inicializar el vector solución y el vector solución copia
+    Matrix vectorSolucion(numEquations, 1);
+    Matrix vectorSolucionCopia(numEquations, 1);
+
+    // Inicializar los vectores solución con ceros
+    // Esto asegura que los vectores tengan el tamaño correcto y estén listos para las iteraciones
+    for (int i = 0; i < numEquations; ++i) {
+        vectorSolucion.at(i, 0) = 0.0;
+        vectorSolucionCopia.at(i, 0) = 0.0;
+    }
     for (int iteracion = 1; iteracion <= maxIter; ++iteracion) {
         double error = 0.0;
         for (int i = 0; i < numEquations; ++i) {
             double suma = 0.0;
-            double vector_i_anterior = vectorSolucion[i];
+            double vector_i_anterior = vectorSolucion.at(i, 0);
             for (int j = 0; j < numEquations; ++j) {
                 if (j != i) {
 
                     if (j < i) {
-                        suma += A.at(i, j) * vectorSolucion[j];
+                        suma += A.at(i, j) * vectorSolucion.at(j, 0);
                     }
                     else if (j > i) {
-                        suma += A.at(i, j) * vectorSolucionCopia[j];
+                        suma += A.at(i, j) * vectorSolucionCopia.at(j, 0);
                     }
                 }
             }
-            vectorSolucion[i] = (b.at(i, 0) - suma) / A.at(i, i);
-            double diferencia = std::abs(vectorSolucion[i] - vector_i_anterior);
+            vectorSolucion.at(i, 0) = (b.at(i, 0) - suma) / A.at(i, i);
+            double diferencia = std::abs(vectorSolucion.at(i,0) - vector_i_anterior);
             if (diferencia > error) {
                 error = diferencia;
             }
@@ -242,10 +258,13 @@ std::vector<double> gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, i
             
             return vectorSolucion;
         }
-        vectorSolucionCopia = vectorSolucion;
+        // Copiar el vector solución actual al vector copia para la próxima iteración
+        for (int i = 0; i < numEquations; ++i) {
+            vectorSolucionCopia.at(i, 0) = vectorSolucion.at(i, 0);
+        }
     }
     
-    std::cout << "No convergió tras " << maxIter << " iteraciones" << std::endl;
+    throw std::runtime_error("El método de Gauss-Seidel no convergió en " + std::to_string(maxIter) + " iteraciones. Verifique que la matriz tenga diagonal dominante.");
     
     return vectorSolucion;
 }

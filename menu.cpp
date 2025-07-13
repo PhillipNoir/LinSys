@@ -63,13 +63,11 @@ void menuPrincipal(){
             std::cout << "Ingrese el vector b:\n";
             b.fillMatrix();
             mostrarPasos = leerBooleano("¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
-            std::vector<double> solution = gaussElimination(A, b, mostrarPasos);
+            Matrix solution = gaussElimination(A, b, mostrarPasos);
             advertenciaSistemaGrande(size);
             std::cout << "Solución:\n";
     
-            for (double val : solution) {
-                std::cout << std::setw(10) << val << " ";
-            }
+            solution.print();
             break;
         }
         case 2: {
@@ -82,13 +80,11 @@ void menuPrincipal(){
             std::cout << "Ingrese el vector b:\n";
             b.fillMatrix();
             mostrarPasos = leerBooleano("¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
-            std::vector<double> solution = gaussJordanElimination(A, b, mostrarPasos);
+            Matrix solution = gaussJordanElimination(A, b, mostrarPasos);
             advertenciaSistemaGrande(size);
             std::cout << "Solución:\n";
     
-            for (double val : solution) {
-                std::cout << std::setw(10) << val << " ";
-            }
+            solution.print();
             break;
         }
         case 3: {
@@ -101,11 +97,9 @@ void menuPrincipal(){
             A.fillMatrix();
             std::cout << "Ingrese el vector b:\n";
             b.fillMatrix();
-            std::vector<double> solution = jacobiMethod(A, b, 1e-6, 500);
+            Matrix solution = jacobiMethod(A, b, 1e-6, 500);
             std::cout << "Solución:\n";
-            for (double val : solution) {
-                std::cout << std::setw(10) << val << " ";
-            }
+            solution.print();
             break;
         }
         case 4: {
@@ -118,11 +112,9 @@ void menuPrincipal(){
             A.fillMatrix();
             std::cout << "Ingrese el vector b:\n";
             b.fillMatrix();
-            std::vector<double> solution = gaussSeidelMethod(A, b, 1e-6, 500);
+            Matrix solution = gaussSeidelMethod(A, b, 1e-6, 500);
             std::cout << "Solución:\n";
-            for (double val : solution) {
-                std::cout << std::setw(10) << val << " ";
-            }
+            solution.print();
             break;
         }
         case 5: 
