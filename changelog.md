@@ -4,6 +4,12 @@ Todas las modificaciones significativas de este proyecto serán documentadas en 
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).
 
+## [1.2.0] - 2025-07-12
+## Actualizado
+- README.md actualizado con el nuevo método.
+- Se implementa el método de Gauss-Seidel como alternativa para sistemas grandes y equipos de bajos recursos.
+- Actualización de la documentación para incluir el nuevo método.
+
 ## [1.1.0] - 2025-07-12
 ## Actualizado
 - Se agrega documentación Doxygen a validations.cpp.

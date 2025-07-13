@@ -1,9 +1,9 @@
 @mainpage LinSys++
 
 # LinSys++
-Solución de sistemas lineales por Gaus y Gauss-Jordan en C++. Linear system solver using Gaussian methods
+Solución de sistemas lineales por Gaus, Gauss-Jordan, Jacobi y Gauss-Seidel en C++. Linear system solver using Jacobi and Gaussian methods
 
-Este es un programa de consola en **C++ puro** que permite resolver sistemas de ecuaciones lineales utilizando los métodos de **eliminación de Gauss** y **eliminación Gauss-Jordan**.
+Este es un programa de consola en **C++ puro** que permite resolver sistemas de ecuaciones lineales utilizando los métodos de **eliminación de Gauss**, **eliminación Gauss-Jordan**, **iteración de Jacobi** e **iteración de Gauss-Seidel**.
 Diseñado como una herramienta educativa y funcional, es ideal para estudiantes de ingeniería, álgebra lineal o métodos numéricos.
 
 ![LinSys++Logo](img/LinSys++Logo.png)
@@ -15,6 +15,7 @@ Diseñado como una herramienta educativa y funcional, es ideal para estudiantes 
 - Resolución paso a paso por el método de **Gauss**.
 - Resolución paso a paso por el método de **Gauss-Jordan**.
 - Resolución iterativa por el método de **Jacobi**
+- Resolución iterativa por el método de **Gauss-Seidel**
 - Interfaz por consola simple y clara.
 - Sin dependencias externas: compilable con cualquier compilador estándar de C++.
 
@@ -38,7 +39,7 @@ Al iniciarse, le pedirá:
 - Ingresar los datos de la matriz A (el mismo programa indicará la posición de la matriz que está ingresando).
 - Ingresar los datos del vector b.
 - Pregunta si desea que se muestren los pasos de la solución si el sistema y el método lo permiten (ingresar 1 para si, 0 para no).
-- Puede hacer cuantos sistemas desee, para salir debe seleccionar la opción 4.
+- Puede hacer cuantos sistemas desee, para salir debe seleccionar la opción 5.
 
 ### 2. Ejemplo de entrada
 

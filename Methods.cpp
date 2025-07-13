@@ -191,3 +191,61 @@ std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int ma
     
     throw std::runtime_error("El método de Jacobi no convergió en " + std::to_string(maxIteraciones) + " iteraciones. " + "Verifique que la matriz tenga diagonal dominante.");
 }
+
+/**
+ * @brief Implementa el método iterativo de Gauss-Seidel para resolver un sistema de ecuaciones lineales.
+ * Este método mejora la aproximación de la solución en cada iteración utilizando los valores más recientes disponibles.
+ * @param A Matriz de coeficientes del sistema (no se modifica).
+ * @param b Vector columna de términos independientes (no se modifica).
+ * @param tolerancia Criterio de parada para la convergencia (por defecto 1e-6).
+ * @param maxIter Número máximo de iteraciones permitidas (por defecto 1000).
+ * @return std::vector<double> Vector solución del sistema.
+ * @throw std::runtime_error Si hay ceros en la diagonal principal o si no converge.
+ */
+std::vector<double> gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter) {
+    // Verificar que no hay ceros en la diagonal
+    int numEquations = A.getRows();
+    const double TOLERANCIA_DIAGONAL = 1e-12;
+    for (int i = 0; i < numEquations; ++i) {
+        if (std::abs(A.at(i, i)) < TOLERANCIA_DIAGONAL) {
+            throw std::runtime_error("Cero en la diagonal principal en posición (" + std::to_string(i) + "," + std::to_string(i) + "). El método no puede continuar.");
+        }
+    }
+    std::vector<double> vectorSolucion(numEquations, 0.0);
+    std::vector<double> vectorSolucionCopia(numEquations, 0.0);
+    for (int iteracion = 1; iteracion <= maxIter; ++iteracion) {
+        double error = 0.0;
+        for (int i = 0; i < numEquations; ++i) {
+            double suma = 0.0;
+            double vector_i_anterior = vectorSolucion[i];
+            for (int j = 0; j < numEquations; ++j) {
+                if (j != i) {
+
+                    if (j < i) {
+                        suma += A.at(i, j) * vectorSolucion[j];
+                    }
+                    else if (j > i) {
+                        suma += A.at(i, j) * vectorSolucionCopia[j];
+                    }
+                }
+            }
+            vectorSolucion[i] = (b.at(i, 0) - suma) / A.at(i, i);
+            double diferencia = std::abs(vectorSolucion[i] - vector_i_anterior);
+            if (diferencia > error) {
+                error = diferencia;
+            }
+        }
+        
+        if (error < tolerancia) {
+            
+            std::cout << "Convergencia alcanzada en iteración " << iteracion << std::endl;
+            
+            return vectorSolucion;
+        }
+        vectorSolucionCopia = vectorSolucion;
+    }
+    
+    std::cout << "No convergió tras " << maxIter << " iteraciones" << std::endl;
+    
+    return vectorSolucion;
+}

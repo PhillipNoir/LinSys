@@ -71,5 +71,20 @@ void imprimirSistema(Matrix& A, Matrix& b);
  */
 std::vector<double> jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones);
 
+/**
+ * @brief Resuelve un sistema de ecuaciones lineales mediante el método iterativo de Gauss-Seidel.
+ * 
+ * Este método mejora la aproximación de la solución en cada iteración utilizando los valores más recientes disponibles.
+ * Requiere que la matriz A tenga diagonal dominante para garantizar convergencia.
+ * 
+ * @param A Matriz de coeficientes del sistema (no se modifica).
+ * @param b Vector columna de términos independientes (no se modifica).
+ * @param tolerancia Criterio de parada para la convergencia (por defecto 1e-6).
+ * @param maxIter Número máximo de iteraciones permitidas (por defecto 1000).
+ * @return std::vector<double> Vector solución del sistema.
+ * 
+ * @throw std::runtime_error Si hay ceros en la diagonal principal o si no converge.
+ */
+std::vector<double> gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter);
 
 #endif
