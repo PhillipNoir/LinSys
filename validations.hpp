@@ -10,7 +10,7 @@
 #define VALIDATIONS_HPP
 
 #include "validations.hpp"
-#include <string>
+#include "String.hpp"
 
 /**
  * @brief Muestra una advertencia si el sistema de ecuaciones es muy grande.
@@ -30,7 +30,7 @@ void advertenciaSistemaGrande(int size);
  * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
  * @return Un número entero ingresado correctamente.
  */
-int leerEntero(const std::string& mensaje);
+int leerEntero(const String& mensaje);
 
 /**
  * @brief Solicita y valida la entrada de un número decimal (double) desde consola.
@@ -40,7 +40,7 @@ int leerEntero(const std::string& mensaje);
  * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
  * @return Un número decimal ingresado correctamente.
  */
-double leerDecimal(const std::string& mensaje);
+double leerDecimal(const String& mensaje);
 
 /**
  * @brief Solicita al usuario una entrada booleana (1 o 0) y la valida.
@@ -50,6 +50,6 @@ double leerDecimal(const std::string& mensaje);
  * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
  * @return true si el usuario ingresa 1, false si ingresa 0.
  */
-bool leerBooleano(const std::string& mensaje);
+bool leerBooleano(const String& mensaje);
 
 #endif

@@ -7,7 +7,7 @@
 #include "Methods.hpp"
 #include <iostream>
 #include <iomanip>
-#include <string>
+#include "String.hpp"
 #include "menu.hpp"
 #include <limits>
 
@@ -37,10 +37,10 @@ void advertenciaSistemaGrande(int size){
  * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
  * @return int El número entero ingresado por el usuario.
  */
-int leerEntero(const std::string& mensaje) {
+int leerEntero(const String& mensaje) {
     int valor;
     while (true) {
-        std::cout << mensaje;
+        mensaje.print();
         std::cin >> valor;
 
         if (std::cin.fail()) {
@@ -63,10 +63,10 @@ int leerEntero(const std::string& mensaje) {
  * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
  * @return double El número decimal ingresado por el usuario.
  */
-double leerDecimal(const std::string& mensaje) {
+double leerDecimal(const String& mensaje) {
     double valor;
     while (true) {
-        std::cout << mensaje;
+        mensaje.print();
         std::cin >> valor;
 
         if (std::cin.fail()) {
@@ -89,10 +89,10 @@ double leerDecimal(const std::string& mensaje) {
  * @param mensaje Mensaje que se muestra al usuario para solicitar la entrada.
  * @return bool El valor booleano ingresado por el usuario.
  */
-bool leerBooleano(const std::string& mensaje) {
+bool leerBooleano(const String& mensaje) {
     int entrada;
     while (true) {
-        std::cout << mensaje;
+        mensaje.print();
         std::cin >> entrada;
 
         if (std::cin.fail() || (entrada != 0 && entrada != 1)) {

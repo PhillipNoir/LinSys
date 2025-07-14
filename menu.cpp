@@ -23,7 +23,7 @@
 #include <iomanip>
 #include "menu.hpp"
 #include "validations.hpp"
-#include <string>
+#include "String.hpp"
 
 void menuPrincipal(){
     int opcion {0};
@@ -48,13 +48,13 @@ void menuPrincipal(){
         std::cout << "- El método de Gauss-Seidel es una mejora del método de Jacobi y puede converger más rápido en algunos casos, pero también requiere que la matriz sea diagonal dominante.\n";
         std::cout << "- Si el sistema es grande, se recomienda usar Jacobi o Gauss-Seidel para evitar problemas de memoria.\n";
         std::cout << "- Los métodos de Gauss y Gauss-Jordan pueden ser menos adecuados para equipos de bajos recursos con sistemas muy grandes debido a su mayor consumo de memoria.\n";
-        opcion = leerEntero("Su elección: ");
+        opcion = leerEntero(String("Su elección: "));
         std::cout << "Entrada registrada como " << opcion << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
 
         switch (opcion)
         {
         case 1: {
-            size = leerEntero("Ingrese el tamaño de la matriz: ");
+            size = leerEntero(String("Ingrese el tamaño de la matriz: "));
             std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
             Matrix A(size, size);
             Matrix b (size, 1);
@@ -62,7 +62,7 @@ void menuPrincipal(){
             A.fillMatrix();
             std::cout << "Ingrese el vector b:\n";
             b.fillMatrix();
-            mostrarPasos = leerBooleano("¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
+            mostrarPasos = leerBooleano(String("¿Desea ver los pasos de la solución? (Y:1/N:0)\n"));
             Matrix solution = gaussElimination(A, b, mostrarPasos);
             advertenciaSistemaGrande(size);
             std::cout << "Solución:\n";
@@ -71,7 +71,7 @@ void menuPrincipal(){
             break;
         }
         case 2: {
-            size = leerEntero("Ingrese el tamaño de la matriz: ");
+            size = leerEntero(String("Ingrese el tamaño de la matriz: "));
             std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
             Matrix A(size, size);
             Matrix b (size, 1);
@@ -79,7 +79,7 @@ void menuPrincipal(){
             A.fillMatrix();
             std::cout << "Ingrese el vector b:\n";
             b.fillMatrix();
-            mostrarPasos = leerBooleano("¿Desea ver los pasos de la solución? (Y:1/N:0)\n");
+            mostrarPasos = leerBooleano(String("¿Desea ver los pasos de la solución? (Y:1/N:0)\n"));
             Matrix solution = gaussJordanElimination(A, b, mostrarPasos);
             advertenciaSistemaGrande(size);
             std::cout << "Solución:\n";
@@ -89,7 +89,7 @@ void menuPrincipal(){
         }
         case 3: {
             // Para el método de Jacobi, no se requiere mostrar pasos intermedios
-            size = leerEntero("Ingrese el tamaño de la matriz: ");
+            size = leerEntero(String("Ingrese el tamaño de la matriz: "));
             std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
             Matrix A(size, size);
             Matrix b (size, 1);
@@ -104,7 +104,7 @@ void menuPrincipal(){
         }
         case 4: {
             // Para el método de Gauss-Seidel, no se requiere mostrar pasos intermedios
-            size = leerEntero("Ingrese el tamaño de la matriz: ");
+            size = leerEntero(String("Ingrese el tamaño de la matriz: "));
             std::cout << "Entrada registrada como " << size << " (cualquier parte decimal fue ignorada en caso de haber sido ingresada).\n";
             Matrix A(size, size);
             Matrix b (size, 1);
