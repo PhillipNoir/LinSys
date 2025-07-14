@@ -142,68 +142,9 @@ Matrix gaussJordanElimination(Matrix& A, Matrix& b, bool mostrarPasos){
  * @throw std::runtime_error Si hay ceros en la diagonal o no converge.
  */
 Matrix jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones) {
-    int numEquations = A.getRows();
-    const double TOLERANCIA_DIAGONAL = 1e-12;
-    
-    
-    // Verificar que no hay ceros en la diagonal
-    for (int i = 0; i < numEquations; ++i) {
-        if (std::abs(A.at(i, i)) < TOLERANCIA_DIAGONAL) {
-            String posicion;
-            posicion.fromInt(i);
-            String errorMessage = String("Cero en la diagonal principal en posición (") + posicion + String(",") + posicion + String("). El método no puede continuar.");
-            throw std::runtime_error(errorMessage.c_str());
-        }
-    }
-    
-    // Inicializar el vector solución y el vector solución anterior
-    Matrix vectorSolucion(numEquations, 1);
-    Matrix vectorSolucionAnterior(numEquations, 1);
-    
-    // Inicializar los vectores solución con ceros
-    // Esto asegura que los vectores tengan el tamaño correcto y estén listos para las iteraciones
-    for (int i = 0; i < numEquations; ++i) {
-        vectorSolucion.at(i, 0) = 0.0;
-        vectorSolucionAnterior.at(i, 0) = 0.0;
-    }
-
-    for (int iter = 0; iter < maxIteraciones; ++iter) {
-        //Se copia el vector solución actual al vector solución anterior para calcular el error
-        for (int i = 0; i < numEquations; ++i) {
-            vectorSolucionAnterior.at(i, 0) = vectorSolucion.at(i, 0);
-        }
-        
-        // Calcular nueva aproximación
-        for (int i = 0; i < numEquations; ++i) {
-            double suma = 0.0;
-            
-            for (int j = 0; j < numEquations; ++j) {
-                if (i != j) {
-                    suma += A.at(i, j) * vectorSolucionAnterior.at(j, 0);
-                }
-            }
-            
-            vectorSolucion.at(i,0) = (b.at(i, 0) - suma) / A.at(i, i);
-        }
-        
-        // Calcular error máximo
-        double error = 0.0;
-        for (int i = 0; i < numEquations; ++i) {
-            error = std::max(error, std::abs(vectorSolucion.at(i,0) - vectorSolucionAnterior.at(i,0)));
-        }
-        
-        // Verificar convergencia
-        if (error < tolerancia) {
-                std::cout << "\n¡Convergencia alcanzada en " << iter + 1 << " iteraciones!" << std::endl;
-                std::cout << "Error final: " << std::scientific << error << std::endl;
-            return vectorSolucion;
-        }
-    }
-    String maxIteracionesStr;
-    maxIteracionesStr.fromInt(maxIteraciones);
-    String errorMessage = String("El método de Jacobi no convergió en ") + maxIteracionesStr + String(" iteraciones. Verifique que la matriz tenga diagonal dominante.");
-    throw std::runtime_error(errorMessage.c_str());
+    return metodoIterativoGeneral(A, b, tolerancia, maxIteraciones, false);
 }
+
 
 /**
  * @brief Implementa el método iterativo de Gauss-Seidel para resolver un sistema de ecuaciones lineales.
@@ -216,66 +157,5 @@ Matrix jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones)
  * @throw std::runtime_error Si hay ceros en la diagonal principal o si no converge.
  */
 Matrix gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter) {
-    // Verificar que no hay ceros en la diagonal
-    int numEquations = A.getRows();
-    const double TOLERANCIA_DIAGONAL = 1e-12;
-    for (int i = 0; i < numEquations; ++i) {
-        if (std::abs(A.at(i, i)) < TOLERANCIA_DIAGONAL) {
-            String posicion;
-            posicion.fromInt(i);
-            String errorMessage = String("Cero en la diagonal principal en posición (") + posicion + String(",") + posicion + String("). El método no puede continuar.");
-            throw std::runtime_error(errorMessage.c_str());
-        }
-    }
-    // Inicializar el vector solución y el vector solución copia
-    Matrix vectorSolucion(numEquations, 1);
-    Matrix vectorSolucionCopia(numEquations, 1);
-
-    // Inicializar los vectores solución con ceros
-    // Esto asegura que los vectores tengan el tamaño correcto y estén listos para las iteraciones
-    for (int i = 0; i < numEquations; ++i) {
-        vectorSolucion.at(i, 0) = 0.0;
-        vectorSolucionCopia.at(i, 0) = 0.0;
-    }
-    for (int iteracion = 1; iteracion <= maxIter; ++iteracion) {
-        double error = 0.0;
-        for (int i = 0; i < numEquations; ++i) {
-            double suma = 0.0;
-            double vector_i_anterior = vectorSolucion.at(i, 0);
-            for (int j = 0; j < numEquations; ++j) {
-                if (j != i) {
-
-                    if (j < i) {
-                        suma += A.at(i, j) * vectorSolucion.at(j, 0);
-                    }
-                    else if (j > i) {
-                        suma += A.at(i, j) * vectorSolucionCopia.at(j, 0);
-                    }
-                }
-            }
-            vectorSolucion.at(i, 0) = (b.at(i, 0) - suma) / A.at(i, i);
-            double diferencia = std::abs(vectorSolucion.at(i,0) - vector_i_anterior);
-            if (diferencia > error) {
-                error = diferencia;
-            }
-        }
-        
-        if (error < tolerancia) {
-            
-            std::cout << "Convergencia alcanzada en iteración " << iteracion << std::endl;
-            
-            return vectorSolucion;
-        }
-        // Copiar el vector solución actual al vector copia para la próxima iteración
-        for (int i = 0; i < numEquations; ++i) {
-            vectorSolucionCopia.at(i, 0) = vectorSolucion.at(i, 0);
-        }
-    }
-    
-    String maxIteracionesStr;
-    maxIteracionesStr.fromInt(maxIter);
-    String errorMessage = String("El método de Gauss-Seidel no convergió en ") + maxIteracionesStr + String(" iteraciones. Verifique que la matriz tenga diagonal dominante.");
-    throw std::runtime_error(errorMessage.c_str());
-    
-    return vectorSolucion;
+   return metodoIterativoGeneral(A, b, tolerancia, maxIter, true);
 }

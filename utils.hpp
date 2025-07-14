@@ -39,4 +39,19 @@ void forwardElimination(Matrix& A, Matrix& b, bool mostrarPasos);
  * @throws std::runtime_error Si se detectan pivotes demasiado pequeños o inconsistencias numéricas.
  */
 void backwardElimination(Matrix& A, Matrix& b, bool mostrarPasos);
+
+/**
+ * @brief Método iterativo generalizado para Jacobi y Gauss-Seidel.
+ * Este método permite resolver sistemas de ecuaciones lineales utilizando
+ * tanto el método de Jacobi como el de Gauss-Seidel, dependiendo del parámetro
+ * `usarValoresActuales`.
+ * @param A Matriz de coeficientes del sistema (no se modifica).
+ * @param b Vector columna de términos independientes (no se modifica).
+ * @param tolerancia Criterio de parada para la convergencia (por defecto 1e-6).
+ * @param maxIter Número máximo de iteraciones permitidas (por defecto 500).
+ * @param usarValoresActuales Si es true, utiliza el método de Gauss-Seidel; si es false, utiliza Jacobi.
+ * @return Matrix Vector solución del sistema.
+ */
+Matrix metodoIterativoGeneral(Matrix& A, Matrix& b, double tolerancia, int maxIter, bool usarValoresActuales);
+
 #endif

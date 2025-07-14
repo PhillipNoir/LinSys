@@ -11,6 +11,7 @@
 #include <iostream>
 #include <iomanip>
 #include "Methods.hpp"
+#include "String.hpp"
 
 
 /**
@@ -144,4 +145,52 @@ void backwardElimination(Matrix& A, Matrix& b, bool mostrarPasos){
         }
         }
     }
+}
+
+/**
+ * @brief Método iterativo generalizado para Jacobi y Gauss-Seidel.
+ * Este método permite resolver sistemas de ecuaciones lineales utilizando
+ * tanto el método de Jacobi como el de Gauss-Seidel, dependiendo del parámetro
+ * `usarValoresActuales`.
+ * @param A Matriz de coeficientes del sistema (no se modifica).
+ * @param b Vector columna de términos independientes (no se modifica).
+ * @param tolerancia Criterio de parada para la convergencia (por defecto 1e-6).
+ * @param maxIter Número máximo de iteraciones permitidas (por defecto 500).
+ * @param usarValoresActuales Si es true, utiliza el método de Gauss-Seidel; si es false, utiliza Jacobi.
+ * @return Matrix Vector solución del sistema.
+ */
+Matrix metodoIterativoGeneral(Matrix& A, Matrix& b, double tolerancia, int maxIter, bool usarValoresActuales) {
+    int n = A.getRows();
+    const double TOLERANCIA_DIAGONAL = 1e-12;
+    for (int i = 0; i < n; ++i) {
+        if (std::abs(A.at(i, i)) < TOLERANCIA_DIAGONAL) {
+            String pos; pos.fromInt(i);
+            String msg = String("Cero en la diagonal principal en (") + pos + String(",") + pos + String(").");
+            throw std::runtime_error(msg.c_str());
+        }
+    }
+    Matrix x(n, 1), xPrev(n, 1);
+    for (int i = 0; i < n; ++i) x.at(i,0) = xPrev.at(i,0) = 0.0;
+
+    for (int iter = 0; iter < maxIter; ++iter) {
+        for (int i = 0; i < n; ++i) xPrev.at(i,0) = x.at(i,0);
+        double error = 0.0;
+        for (int i = 0; i < n; ++i) {
+            double suma = 0.0;
+            for (int j = 0; j < n; ++j) {
+                if (j == i) continue;
+                if (usarValoresActuales && j < i)
+                    suma += A.at(i, j) * x.at(j, 0); // Gauss-Seidel: usa el valor ya actualizado
+                else
+                    suma += A.at(i, j) * xPrev.at(j, 0); // Jacobi: usa el valor anterior
+            }
+            double nuevo = (b.at(i, 0) - suma) / A.at(i, i);
+            error = std::max(error, std::abs(nuevo - x.at(i,0)));
+            x.at(i,0) = nuevo;
+        }
+        if (error < tolerancia) return x;
+    }
+    String maxIterStr; maxIterStr.fromInt(maxIter);
+    String msg = String("El método no convergió en ") + maxIterStr + String(" iteraciones.");
+    throw std::runtime_error(msg.c_str());
 }
