@@ -4,6 +4,14 @@ Todas las modificaciones significativas de este proyecto serán documentadas en 
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).
 
+## [1.2.2] - 2025- 07-14
+## Refactorizado
+- Eliminación de std::string en todos los métodos numéricos y otros archivos que lo utilicen.
+- Implementación de una clase String para dejar de depender de otro componente de la STL.
+- Todos los archivos que antes usaban std::string ahora usan objetos de la clase String, asegurando compatibilidad con sistemas donde la STL está limitada.
+- Se refactoriza función del método Jacobi y del Metodo Gauss-Seidel para que ambos dependan de una función auxiliar que aplica un método iterativo dependiendo del parámetro booleano ingresado.
+- README.md actualizado y traducido al inglés.
+
 ## [1.2.1] - 2025-07-13
 ## Refactorizado
 - Eliminación de std::vector en todos los métodos numéricos para la solución de sistemas de ecuaciones lineales.
