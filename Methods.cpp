@@ -14,7 +14,7 @@
 #include <iostream>
 #include <iomanip>
 #include "utils.hpp"
-#include <string>
+#include "String.hpp"
 
 /**
  * @brief Imprime el sistema de ecuaciones lineales en forma matricial.
@@ -149,7 +149,10 @@ Matrix jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones)
     // Verificar que no hay ceros en la diagonal
     for (int i = 0; i < numEquations; ++i) {
         if (std::abs(A.at(i, i)) < TOLERANCIA_DIAGONAL) {
-            throw std::runtime_error("Cero en la diagonal principal en posición (" + std::to_string(i) + "," + std::to_string(i) + "). El método de Jacobi no puede continuar.");
+            String posicion;
+            posicion.fromInt(i);
+            String errorMessage = String("Cero en la diagonal principal en posición (") + posicion + String(",") + posicion + String("). El método no puede continuar.");
+            throw std::runtime_error(errorMessage.c_str());
         }
     }
     
@@ -196,8 +199,10 @@ Matrix jacobiMethod(Matrix& A, Matrix& b, double tolerancia, int maxIteraciones)
             return vectorSolucion;
         }
     }
-    
-    throw std::runtime_error("El método de Jacobi no convergió en " + std::to_string(maxIteraciones) + " iteraciones. " + "Verifique que la matriz tenga diagonal dominante.");
+    String maxIteracionesStr;
+    maxIteracionesStr.fromInt(maxIteraciones);
+    String errorMessage = String("El método de Jacobi no convergió en ") + maxIteracionesStr + String(" iteraciones. Verifique que la matriz tenga diagonal dominante.");
+    throw std::runtime_error(errorMessage.c_str());
 }
 
 /**
@@ -216,7 +221,10 @@ Matrix gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter) {
     const double TOLERANCIA_DIAGONAL = 1e-12;
     for (int i = 0; i < numEquations; ++i) {
         if (std::abs(A.at(i, i)) < TOLERANCIA_DIAGONAL) {
-            throw std::runtime_error("Cero en la diagonal principal en posición (" + std::to_string(i) + "," + std::to_string(i) + "). El método no puede continuar.");
+            String posicion;
+            posicion.fromInt(i);
+            String errorMessage = String("Cero en la diagonal principal en posición (") + posicion + String(",") + posicion + String("). El método no puede continuar.");
+            throw std::runtime_error(errorMessage.c_str());
         }
     }
     // Inicializar el vector solución y el vector solución copia
@@ -264,7 +272,10 @@ Matrix gaussSeidelMethod(Matrix& A, Matrix& b, double tolerancia, int maxIter) {
         }
     }
     
-    throw std::runtime_error("El método de Gauss-Seidel no convergió en " + std::to_string(maxIter) + " iteraciones. Verifique que la matriz tenga diagonal dominante.");
+    String maxIteracionesStr;
+    maxIteracionesStr.fromInt(maxIter);
+    String errorMessage = String("El método de Gauss-Seidel no convergió en ") + maxIteracionesStr + String(" iteraciones. Verifique que la matriz tenga diagonal dominante.");
+    throw std::runtime_error(errorMessage.c_str());
     
     return vectorSolucion;
 }
