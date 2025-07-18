@@ -991,7 +991,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = main.cpp Matrix.cpp Matrix.hpp menu.cpp menu.hpp Methods.cpp Methods.hpp utils.cpp utils.hpp validations.cpp validations.hpp README.md /img
+INPUT                  = main.cpp Matrix.cpp Matrix.hpp String.cpp String.hpp menu.cpp menu.hpp Methods.cpp Methods.hpp utils.cpp utils.hpp validations.cpp validations.hpp README.md /img
 
 # This tag can be used to specify the character encoding of the source files
 # that Doxygen parses. Internally Doxygen uses the UTF-8 encoding. Doxygen uses
